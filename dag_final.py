@@ -10,7 +10,6 @@ def final_logic(**kwargs):
     b = ti.xcom_pull(task_ids="run_b", dag_id="dag_b", key="result_b")
     c = ti.xcom_pull(task_ids="run_c", dag_id="dag_c", key="result_c")
     print(f"Results collected: A={a}, B={b}, C={c}")
-    print("Final logic executed")
 
 with DAG(
     dag_id="dag_final",
@@ -55,7 +54,6 @@ with DAG(
     final_task = PythonOperator(
         task_id="run_final_logic",
         python_callable=final_logic,
-        provide_context=True,
     )
 
     [wait_a, wait_b, wait_c] >> final_task
