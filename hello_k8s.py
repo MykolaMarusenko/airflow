@@ -16,5 +16,5 @@ with DAG(
         namespace="airflow",
         image="busybox",
         cmds=["/bin/sh", "-c", "echo 'Hello from Kubernetes!'"],
-        is_delete_operator_pod=True,
+        is_delete_operator_pod=False,
     )
