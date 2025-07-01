@@ -1,15 +1,19 @@
-from datetime import datetime
-from airflow import DAG
+from airflow.decorators import dag, task
 from airflow.operators.bash import BashOperator
+from datetime import datetime, timedelta
 
-with DAG(
-    dag_id="hello_world_simple",
+@dag(
     start_date=datetime(2023, 1, 1),
-    schedule_interval=None,
+    schedule=None,
     catchup=False,
-) as dag:
-
-    task = BashOperator(
+    tags=["example"],
+)
+def hello_world_simple():
+    say_hello = BashOperator(
         task_id="say_hello",
         bash_command="echo 'Hello from Airflow inside Kubernetes!'",
     )
+
+    say_hello
+
+dag_instance = hello_world_simple()
