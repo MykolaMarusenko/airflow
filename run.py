@@ -19,10 +19,10 @@ def create_configmap():
 with DAG(
     dag_id="create_configmap_test",
     start_date=datetime(2023, 1, 1),
-    schedule_interval="0 * * * *",
+    schedule="0 * * * *",
     catchup=False,
-    tags=["k8s", "configmap"],
 ) as dag:
+
 
     create_task = PythonOperator(
         task_id="create_test_configmap",
