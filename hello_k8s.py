@@ -6,6 +6,7 @@ with DAG(
     dag_id="hello_k8s",
     schedule=None,
     start_date=datetime(2023, 1, 1),
+    schedule="*/2 * * * *",
     catchup=False,
     tags=["example"],
 ) as dag:
