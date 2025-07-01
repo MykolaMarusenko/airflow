@@ -1,13 +1,20 @@
+from datetime import datetime
+from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 
-k = KubernetesPodOperator(
-    name="hello-dry-run",
-    image="debian",
-    cmds=["bash", "-cx"],
-    arguments=["echo", "10"],
-    labels={"foo": "bar"},
-    task_id="dry_run_demo",
-    do_xcom_push=True,
-)
+with DAG(
+    dag_id="hello_k8s",
+    schedule=None,
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+    tags=["example"],
+) as dag:
 
-k.dry_run()
+    hello_task = KubernetesPodOperator(
+        task_id="hello_k8s_task",
+        name="hello-task",
+        namespace="airflow",
+        image="busybox",
+        cmds=["/bin/sh", "-c", "echo 'Hello from Kubernetes!'"],
+        is_delete_operator_pod=True,
+    )
