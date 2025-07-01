@@ -4,8 +4,8 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import Kubernete
 
 with DAG(
     dag_id="hello_k8s",
-    schedule_interval=None,
-    start_date=datetime.now() - timedelta(days=1),
+    schedule=None,  # вместо schedule_interval=None
+    start_date=datetime(2025, 6, 30),  # фиксированная дата, не datetime.now()
     catchup=False,
 ) as dag:
 
