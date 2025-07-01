@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
 
-def task_a(**kwargs):
+def task_c(**kwargs):
     print("C complete!")
     kwargs["ti"].xcom_push(key="result_c", value="result-from-c")
 
