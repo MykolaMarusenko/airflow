@@ -8,4 +8,7 @@ def task_a(**kwargs):
     kwargs["ti"].xcom_push(key="result_a", value="result-from-a")
 
 with DAG(dag_id="dag_a", start_date=datetime(2023, 1, 1), schedule=None, catchup=False) as dag:
-    run_a = PythonOperator(task_id="run_a", python_callable=task_a, provide_context=True)
+run_a = PythonOperator(
+    task_id="run_a",
+    python_callable=task_a
+)
