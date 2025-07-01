@@ -1,11 +1,11 @@
+from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.utils.dates import days_ago
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 
 with DAG(
     dag_id="hello_k8s",
     schedule_interval=None,
-    start_date=days_ago(1),
+    start_date=datetime.now() - timedelta(days=1),
     catchup=False,
 ) as dag:
 
