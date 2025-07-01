@@ -1,18 +1,19 @@
-from airflow.decorators import dag
-from airflow.operators.bash import BashOperator
-from datetime import datetime
+from datetime import datetime, timedelta
+from airflow import DAG
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 
-@dag(
-    dag_id="hello_world_simple",
-    schedule=None,
-    start_date=datetime(2023, 1, 1),
+with DAG(
+    dag_id="hello_k8s",
+    schedule_interval=None,
+    start_date=datetime.now() - timedelta(days=1),
     catchup=False,
-    tags=["example"],
-)
-def hello_world_simple():
-    BashOperator(
-        task_id="say_hello",
-        bash_command="echo 'Hello from Airflow!'",
-    )
+) as dag:
 
-dag = hello_world_simple()
+    hello_task = KubernetesPodOperator(
+        task_id="hello_k8s_task",
+        name="hello-task",
+        namespace="airflow",
+        image="busybox",
+        cmds=["echo", "Hello from Kubernetes!"],
+        is_delete_operator_pod=True,
+    )
