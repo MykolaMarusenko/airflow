@@ -3,13 +3,14 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime
 
 def task_one():
-    print("Running Task One")
+    print("✅ Running Task One")
 
 def task_two():
-    print("Running Task Two")
+    print("💥 Running Task Two and raising an error")
+    raise Exception("Intentional failure in Task Two")
 
 def task_three():
-    print("Running Task Three")
+    print("✅ Running Task Three")
 
 with DAG(
     dag_id="multi_task_example",
@@ -33,4 +34,4 @@ with DAG(
         python_callable=task_three,
     )
 
-    t1 >> [t2, t3] 
+    t1 >> [t2, t3]
