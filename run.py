@@ -19,7 +19,7 @@ def create_configmap():
 with DAG(
     dag_id="create_configmap_test",
     start_date=datetime(2023, 1, 1),
-    schedule="0 * * * *",
+    schedule=None,
     catchup=False,
 ) as dag:
 
