@@ -2,35 +2,35 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
 
-def task_a():
-    print("Running Task A")
+def task_one():
+    print("Running Task One")
 
-def task_b():
-    print("Running Task B")
+def task_two():
+    print("Running Task Two")
 
-def task_c():
-    print("Running Task C")
+def task_three():
+    print("Running Task Three")
 
 with DAG(
     dag_id="multi_task_example",
     start_date=datetime(2023, 1, 1),
-    schedule_interval="@daily",
+    schedule_interval=None,
     catchup=False,
 ) as dag:
 
     t1 = PythonOperator(
-        task_id="run_a",
-        python_callable=task_a,
+        task_id="task_one",
+        python_callable=task_one,
     )
 
     t2 = PythonOperator(
-        task_id="run_b",
-        python_callable=task_b,
+        task_id="task_two",
+        python_callable=task_two,
     )
 
     t3 = PythonOperator(
-        task_id="run_c",
-        python_callable=task_c,
+        task_id="task_three",
+        python_callable=task_three,
     )
 
-    t1 >> [t2, t3]
+    t1 >> [t2, t3] 
