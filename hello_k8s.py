@@ -14,7 +14,7 @@ with DAG(
         task_id="hello_k8s_task",
         name="hello-task",
         image="busybox",
-        cmds=["sh", "-c", "aws sts get-caller-identity"],
+        cmds=["sh", "-c", "sleep 30"],
         is_delete_operator_pod=False,
         kubernetes_conn_id="mm-test",
         in_cluster=False,
