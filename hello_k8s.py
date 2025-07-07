@@ -17,7 +17,4 @@ with DAG(
         cmds=["sh", "-c", "sleep 30"],
         is_delete_operator_pod=False,
         kubernetes_conn_id="mm-test",
-        in_cluster=False,
-        service_account_name="mm-airflow",
-        namespace="krci-bff-mm-dev",
     )
