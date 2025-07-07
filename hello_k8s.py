@@ -16,7 +16,6 @@ with DAG(
         namespace="airflow",
         image="busybox",
         cmds=["sh", "-c", "aws sts get-caller-identity"],
-        service_account_name="irsa-sa",
         is_delete_operator_pod=False,
         kubernetes_conn_id="mm-test",
     )
