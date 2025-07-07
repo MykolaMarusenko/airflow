@@ -19,5 +19,5 @@ with DAG(
         kubernetes_conn_id="mm-test",
         in_cluster=False,
         service_account_name="mm-airflo",
-        namespace="krci-bff-mm-dev",
+        namespace="krci-bff-mm-de",
     )
