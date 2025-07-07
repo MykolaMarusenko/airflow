@@ -13,7 +13,6 @@ with DAG(
     hello_task = KubernetesPodOperator(
         task_id="hello_k8s_task",
         name="hello-task",
-        namespace="airflow",
         image="busybox",
         cmds=["sh", "-c", "aws sts get-caller-identity"],
         is_delete_operator_pod=False,
