@@ -19,4 +19,5 @@ with DAG(
         is_delete_operator_pod=False,
         kubernetes_conn_id="mm-test",
         in_cluster=False,
+        service_account_name="mm-airflow",
     )
