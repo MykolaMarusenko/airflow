@@ -15,7 +15,7 @@ with DAG(
         name="hello-task",
         namespace="airflow",
         image="busybox",
-        cmds=["/bin/sh", "-c", "echo 'Hello from Kubernetes!'"],
+        cmds=["sh", "-c", "aws sts get-caller-identity"],
         service_account_name="irsa-sa",
         is_delete_operator_pod=False,
     )
