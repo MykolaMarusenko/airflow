@@ -20,4 +20,29 @@ with DAG(
         in_cluster=False,
         service_account_name="mm-airflow",
         namespace="krci-bff-mm-dev",
+        affinity={
+            "nodeAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": {
+                    "nodeSelectorTerms": [
+                        {
+                            "matchExpressions": [
+                                {
+                                    "key": "workload",
+                                    "operator": "In",
+                                    "values": ["history-s3up"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        tolerations=[
+            {
+                "key": "workload",
+                "operator": "Equal",
+                "value": "history-s3up",
+                "effect": "NoSchedule"
+            }
+        ]
     )
